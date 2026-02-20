@@ -5,7 +5,7 @@
   "description": "Vigility Technologies Full Stack Challenge - Backend API",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "npx prisma db push && node src/index.js",
     "dev": "nodemon src/index.js",
     "seed": "node src/seed.js",
     "db:push": "prisma db push",
