@@ -5,18 +5,20 @@ import prisma from '../lib/prisma.js'
 
 const router = express.Router()
 
+const isProd = process.env.NODE_ENV === 'production'
+
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: false,
-  sameSite: 'lax',
-  maxAge: 24 * 60 * 60 * 1000 
+  secure: isProd,
+  sameSite: isProd ? 'none' : 'lax',
+  maxAge: 24 * 60 * 60 * 1000
 }
 
 const USER_COOKIE_OPTIONS = {
   httpOnly: false,
-  secure: false,
-  sameSite: 'lax',
-  maxAge: 24 * 60 * 60 * 1000 
+  secure: isProd,
+  sameSite: isProd ? 'none' : 'lax',
+  maxAge: 24 * 60 * 60 * 1000
 }
 
 // POST /register
