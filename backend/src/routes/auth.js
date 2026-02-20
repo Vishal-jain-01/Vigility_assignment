@@ -5,19 +5,19 @@ import prisma from '../lib/prisma.js'
 
 const router = express.Router()
 
-const isProd = process.env.NODE_ENV === 'production'
+const isLocal = !process.env.FRONTEND_URL
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: isProd,
-  sameSite: isProd ? 'none' : 'lax',
+  secure: !isLocal,
+  sameSite: isLocal ? 'lax' : 'none',
   maxAge: 24 * 60 * 60 * 1000
 }
 
 const USER_COOKIE_OPTIONS = {
   httpOnly: false,
-  secure: isProd,
-  sameSite: isProd ? 'none' : 'lax',
+  secure: !isLocal,
+  sameSite: isLocal ? 'lax' : 'none',
   maxAge: 24 * 60 * 60 * 1000
 }
 
