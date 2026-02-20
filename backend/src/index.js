@@ -10,8 +10,20 @@ import analyticsRoutes from './routes/analytics.js'
 
 const app = express()
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://vigility-assignment.vercel.app',
+  process.env.FRONTEND_URL,
+].filter(Boolean)
+
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true
 }))
 
