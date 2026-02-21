@@ -103,8 +103,8 @@ router.post('/login', async (req, res) => {
 
 // POST /logout
 router.post('/logout', (req, res) => {
-  res.clearCookie('auth_token', { httpOnly: true, sameSite: 'lax' })
-  res.clearCookie('user_data', { sameSite: 'lax' })
+  res.clearCookie('auth_token', { httpOnly: true, secure: !isLocal, sameSite: isLocal ? 'lax' : 'none' })
+  res.clearCookie('user_data', { secure: !isLocal, sameSite: isLocal ? 'lax' : 'none' })
   res.json({ message: 'Logged out successfully' })
 })
 
