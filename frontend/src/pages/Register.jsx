@@ -21,7 +21,7 @@ export default function Register() {
     setError('')
     try {
       const res = await registerApi(form)
-      login(res.data.user)
+      login(res.data.user, res.data.token)
       navigate('/dashboard')
     } catch (err) {
       setError(err.response?.data?.error || 'Registration failed. Please try again.')

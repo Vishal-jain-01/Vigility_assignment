@@ -21,7 +21,7 @@ export default function Login() {
     setError('')
     try {
       const res = await loginApi(form)
-      login(res.data.user)
+      login(res.data.user, res.data.token)
       navigate('/dashboard')
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed. Please try again.')

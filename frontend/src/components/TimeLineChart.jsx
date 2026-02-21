@@ -27,7 +27,6 @@ export default function TimeLineChart({ data }) {
   if (!data || data.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-64 text-gray-500 text-sm gap-2">
-        <span className="text-3xl">📈</span>
         <span>Click a bar on the left to see its time trend</span>
       </div>
     )

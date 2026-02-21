@@ -6,8 +6,12 @@ const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
 
+  // Only clear non-auth localStorage items on mount
+  // (preserving auth_token for cross-origin auth fallback)
   useEffect(() => {
+    const token = localStorage.getItem('auth_token')
     localStorage.clear()
+    if (token) localStorage.setItem('auth_token', token)
   }, [])
 
 
@@ -20,8 +24,11 @@ export function AuthProvider({ children }) {
     }
   })
 
-  const login = (userData) => {
+  const login = (userData, token) => {
     setUser(userData)
+    if (token) {
+      localStorage.setItem('auth_token', token)
+    }
   }
 
   const logout = async () => {

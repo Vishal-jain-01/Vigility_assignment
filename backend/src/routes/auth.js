@@ -57,7 +57,7 @@ router.post('/register', async (req, res) => {
     res.cookie('auth_token', token, COOKIE_OPTIONS)
     res.cookie('user_data', JSON.stringify(userData), USER_COOKIE_OPTIONS)
 
-    res.status(201).json({ user: userData })
+    res.status(201).json({ user: userData, token })
   } catch (err) {
     console.error('Register error:', err)
     res.status(500).json({ error: 'Server error' })
@@ -94,7 +94,7 @@ router.post('/login', async (req, res) => {
     res.cookie('auth_token', token, COOKIE_OPTIONS)
     res.cookie('user_data', JSON.stringify(userData), USER_COOKIE_OPTIONS)
 
-    res.json({ user: userData })
+    res.json({ user: userData, token })
   } catch (err) {
     console.error('Login error:', err)
     res.status(500).json({ error: 'Server error' })

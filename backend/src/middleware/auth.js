@@ -1,7 +1,15 @@
 import jwt from 'jsonwebtoken'
 
 const authMiddleware = (req, res, next) => {
-  const token = req.cookies?.auth_token
+  let token = req.cookies?.auth_token
+
+  // Fallback: check Authorization header (needed when cross-origin cookies are blocked)
+  if (!token) {
+    const authHeader = req.headers.authorization
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      token = authHeader.split(' ')[1]
+    }
+  }
 
   if (!token) {
     return res.status(401).json({ error: 'No token provided' })
