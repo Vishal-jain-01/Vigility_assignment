@@ -32,10 +32,24 @@ export default function TimeLineChart({ data }) {
     )
   }
 
+  let chartData = data
+  if (data.length === 1) {
+    const singleDate = new Date(data[0].date)
+    const prevDay = new Date(singleDate)
+    prevDay.setDate(prevDay.getDate() - 1)
+    const nextDay = new Date(singleDate)
+    nextDay.setDate(nextDay.getDate() + 1)
+    chartData = [
+      { date: prevDay.toISOString().split('T')[0], count: 0 },
+      data[0],
+      { date: nextDay.toISOString().split('T')[0], count: 0 }
+    ]
+  }
+
   return (
     <ResponsiveContainer width="100%" height={280}>
       <LineChart
-        data={data}
+        data={chartData}
         margin={{ top: 5, right: 10, left: -10, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" stroke="#374151" vertical={false} />

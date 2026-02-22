@@ -5,7 +5,6 @@ const api = axios.create({
   withCredentials: true 
 })
 
-// Attach Bearer token on every request (fallback when cross-origin cookies are blocked)
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('auth_token')
   if (token) {
