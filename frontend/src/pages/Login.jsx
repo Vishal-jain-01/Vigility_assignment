@@ -92,11 +92,7 @@ export default function Login() {
         </p>
 
 
-        <div className="mt-5 p-3.5 bg-gray-700/50 rounded-lg border border-gray-600">
-          <p className="text-xs font-semibold text-gray-300 mb-1.5">🔑 Demo Credentials</p>
-          <p className="text-xs text-gray-400">Username: <span className="text-gray-200">user1</span></p>
-          <p className="text-xs text-gray-400">Password: <span className="text-gray-200">password123</span></p>
-        </div>
+        
       </div>
     </div>
   )
