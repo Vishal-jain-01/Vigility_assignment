@@ -1,12 +1,14 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8002',
-  withCredentials: true 
+  withCredentials: true
 })
 
+// Attach Bearer token from cookie on every request (fallback when cross-origin cookies are blocked)
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('auth_token')
+  const token = Cookies.get('auth_token')
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }

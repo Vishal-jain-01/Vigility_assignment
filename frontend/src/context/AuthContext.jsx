@@ -1,19 +1,14 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import Cookies from 'js-cookie'
 import api from '../utils/api'
 
 const AuthContext = createContext(null)
 
+// Store token in a cookie accessible to JS (for cross-origin Bearer auth)
+const TOKEN_COOKIE = 'auth_token'
+const COOKIE_OPTS = { expires: 1, sameSite: 'None', secure: true }
+
 export function AuthProvider({ children }) {
-
-  // Only clear non-auth localStorage items on mount
-  // (preserving auth_token for cross-origin auth fallback)
-  useEffect(() => {
-    const token = localStorage.getItem('auth_token')
-    localStorage.clear()
-    if (token) localStorage.setItem('auth_token', token)
-  }, [])
-
 
   const [user, setUser] = useState(() => {
     try {
@@ -27,7 +22,7 @@ export function AuthProvider({ children }) {
   const login = (userData, token) => {
     setUser(userData)
     if (token) {
-      localStorage.setItem('auth_token', token)
+      Cookies.set(TOKEN_COOKIE, token, COOKIE_OPTS)
     }
   }
 
@@ -40,10 +35,9 @@ export function AuthProvider({ children }) {
 
     const userId = user?.id
     setUser(null)
-    Cookies.remove('auth_token')
+    Cookies.remove(TOKEN_COOKIE)
     Cookies.remove('user_data')
     if (userId) Cookies.remove(`vigility_filters_${userId}`)
-    localStorage.clear()
   }
 
   return (
