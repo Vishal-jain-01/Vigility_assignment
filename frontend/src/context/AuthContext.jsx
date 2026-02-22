@@ -4,7 +4,6 @@ import api from '../utils/api'
 
 const AuthContext = createContext(null)
 
-// Store token in a cookie accessible to JS (for cross-origin Bearer auth)
 const TOKEN_COOKIE = 'auth_token'
 const COOKIE_OPTS = { expires: 1, sameSite: 'None', secure: true }
 

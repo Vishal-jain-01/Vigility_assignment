@@ -76,10 +76,8 @@ async function seed() {
   console.log('Created 100 feature clicks across the last 90 days\n')
 
   console.log('Seeding complete!')
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
   console.log('Test credentials (all users share password: password123)')
   USERS.forEach(u => console.log(`   ${u.username.padEnd(8)} | age: ${u.age} | gender: ${u.gender}`))
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
 }
 
 seed()

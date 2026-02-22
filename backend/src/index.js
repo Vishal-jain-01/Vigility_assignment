@@ -30,7 +30,6 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 
-// Routes
 app.use('/', authRoutes)
 app.use('/', trackRoutes)
 app.use('/', analyticsRoutes)
